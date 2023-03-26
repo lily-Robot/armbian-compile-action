@@ -17,7 +17,7 @@ runs:
       with:
         repository: chainsx/armbian-legacy-build
         ref: station
-        path: build
+        path: test
     - name: Set env
       shell: bash
       run: |
