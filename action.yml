@@ -37,7 +37,7 @@ runs:
     - name: Build
       shell: bash
       run: |
-        mv ./test ./build
+
         cd ./build
         touch .ignore_changes
         #sed -i "s|https://github.com/150balbes/rockchip-kernel|https://github.com/chainsx/kernel-rk3588|g" config/sources/families/media.conf
