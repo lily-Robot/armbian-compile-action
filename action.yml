@@ -16,7 +16,7 @@ runs:
       uses: actions/checkout@v3
       with:
         repository: chainsx/armbian-legacy-build
-        ref: station-m3
+        ref: station-m2
         path: build
     - name: Set env
       shell: bash
@@ -24,20 +24,15 @@ runs:
         if [ ${{ inputs.flavor }} == "debian" ]
         then
           echo "release=sid" >> $GITHUB_ENV
-          echo "build-minimal=no" >> $GITHUB_ENV
-          echo "build-desktop=yes" >> $GITHUB_ENV
-          echo "desktop-environment=gnome" >> $GITHUB_ENV
-          echo "desktop-environment-config-name=config_base" >> $GITHUB_ENV
+          echo "build-minimal=yes" >> $GITHUB_ENV
+          echo "build-desktop=no" >> $GITHUB_ENV
           echo "expert=no" >> $GITHUB_ENV
         elif [ ${{ inputs.flavor }} == "ubuntu" ]
         then
           echo "release=jammy" >> $GITHUB_ENV
-          echo "build-minimal=no" >> $GITHUB_ENV
-          echo "build-desktop=yes" >> $GITHUB_ENV
-          echo "desktop-environment=gnome" >> $GITHUB_ENV
-          echo "desktop-environment-config-name=config_base" >> $GITHUB_ENV
+          echo "build-minimal=yes" >> $GITHUB_ENV
+          echo "build-desktop=no" >> $GITHUB_ENV
           echo "expert=yes" >> $GITHUB_ENV
-          echo "desktop_appgroups_selected=\"3dsupport desktop_tools browsers\"" >> $GITHUB_ENV
         fi
     - name: Build
       shell: bash
@@ -45,22 +40,6 @@ runs:
         cd ./build
         touch .ignore_changes
         #sed -i "s|https://github.com/150balbes/rockchip-kernel|https://github.com/chainsx/kernel-rk3588|g" config/sources/families/media.conf
-        #sed -i "s|kernel-5.10|main|g" config/sources/families/media.conf
-        #sed -i "s|rk3588s-roc-pc.dtb|roc-rk3588s-pc.dtb|g" config/boards/station-m3.conf
-        
-        #echo "" > lib/functions/compilation/patch/drivers_network.sh
-        #echo "" > lib/functions/compilation/patch/drivers-harness.sh
-        
-        rm config/kernel/linux-media-legacy.config
-        wget https://github.com/chainsx/kernel-rk3588/raw/main/arch/arm64/configs/linux-rockchip-rk3588-legacy_defconfig -O config/kernel/linux-media-legacy.config
-        
-        #rm patch/kernel/media-legacy/*
-        
-        
-        if [ ${{ inputs.board }} == "station-m3" ]; then
-          mkdir userpatches
-          cp ../userpatches/customize-image.sh userpatches/customize-image.sh
-        fi
         
         #git status
         #docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
@@ -73,11 +52,7 @@ runs:
         BUILD_DESKTOP=${{ env.build-desktop }} \
         KERNEL_CONFIGURE=no \
         KERNEL_ONLY=no \
-        DESKTOP_ENVIRONMENT=${{ env.desktop-environment }} \
-        DESKTOP_ENVIRONMENT_CONFIG_NAME=${{ env.desktop-environment-config-name }} \
-        DESKTOP_APPGROUPS_SELECTED=${{ env.desktop_appgroups_selected }} \
         EXPERT=${{ env.expert }} \
-        BOARD_FIRMWARE_INSTALL="-full" \
         SHARE_LOG=no \
         DEBUG=yes \
         COMPRESS_OUTPUTIMAGE=sha,gpg,xz
