@@ -41,7 +41,7 @@ runs:
         touch .ignore_changes
         #sed -i "s|https://github.com/150balbes/rockchip-kernel|https://github.com/chainsx/kernel-rk3588|g" config/sources/families/media.conf
         rm config/kernel/linux-station-p2-legacy.config
-        wget https://github.com/chainsx/kernel-rk3588/raw/main/arch/arm64/configs/firefly-linux.config -O config/kernel/linux-station-p2-legacy.config
+        wget https://github.com/chainsx/kernel-rk3588/raw/main/arch/arm64/configs/firefly-test_defconfig -O config/kernel/linux-station-p2-legacy.config
         
         #git status
         #docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
