@@ -16,8 +16,8 @@ runs:
       uses: actions/checkout@v3
       with:
         repository: chainsx/armbian-legacy-build
-        ref: station
-        path: test
+        ref: test
+        path: build
     - name: Set env
       shell: bash
       run: |
