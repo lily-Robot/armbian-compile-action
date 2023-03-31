@@ -15,8 +15,8 @@ runs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        repository: chainsx/armbian-legacy-build
-        ref: station
+        repository: armbian/build
+        ref: main
         path: build
     - name: Set env
       shell: bash
@@ -40,11 +40,9 @@ runs:
 
         cd ./build
         touch .ignore_changes
-        rm config/kernel/linux-station-p2-legacy.config
-        wget https://github.com/chainsx/kernel-rk356x/raw/main/arch/arm64/configs/station_linux_defconfig -O config/kernel/linux-station-p2-legacy.config
         
-        #git status
-        #docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
+        git status
+        docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
              
         ./compile.sh \
         BOARD=${{ inputs.board }} \
@@ -53,7 +51,6 @@ runs:
         BUILD_MINIMAL=${{ env.build-minimal }} \
         BUILD_DESKTOP=${{ env.build-desktop }} \
         KERNEL_CONFIGURE=no \
-        KERNEL_ONLY=no \
         EXPERT=${{ env.expert }} \
         SHARE_LOG=no \
         DEBUG=yes \
