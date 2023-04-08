@@ -16,7 +16,7 @@ runs:
       uses: actions/checkout@v3
       with:
         repository: chainsx/armbian-legacy-build
-        ref: clang-test
+        ref: station
         path: build
     - name: Set env
       shell: bash
