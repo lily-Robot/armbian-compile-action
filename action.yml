@@ -53,7 +53,6 @@ runs:
         BUILD_MINIMAL=${{ env.build-minimal }} \
         BUILD_DESKTOP=${{ env.build-desktop }} \
         KERNEL_CONFIGURE=no \
-        KERNEL_ONLY=no \
         EXPERT=${{ env.expert }} \
         SHARE_LOG=no \
         DEBUG=yes \
