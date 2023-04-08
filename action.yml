@@ -15,8 +15,8 @@ runs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        repository: armbian/build
-        ref: main
+        repository: chainsx/armbian-legacy-build
+        ref: station
         path: build
     - name: Set env
       shell: bash
