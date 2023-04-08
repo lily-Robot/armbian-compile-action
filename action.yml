@@ -41,7 +41,7 @@ runs:
         cd ./build
         touch .ignore_changes
         
-        sed -i "s|ARCH=${ARCHITECTURE}|ARCH=${ARCHITECTURE} LLVM=1|g" lib/functions/compilation/kernel-make.sh
+        sed -i "s|ARCH=${ARCHITECTURE}|ARCH=${ARCHITECTURE}\ LLVM=1|g" lib/functions/compilation/kernel-make.sh
         
         git status
         docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
